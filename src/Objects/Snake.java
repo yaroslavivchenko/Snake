@@ -29,16 +29,27 @@ class Snake {
             snakeY[0]++;
         }
         //right
+        if (direction == 1) {
+            snakeX[0]++;
+        }
+        //left
         if (direction == 3) {
             snakeX[0]--;
         }
-        //left
-        if (direction == 1) {
-            snakeY[0]++;
+
+
+        if (snakeX[0] > SnakeGameMain.WIDTH - 1) {
+            snakeX[0] = 0;
         }
-        if (snakeX[0] > SnakeGameMain.WIDTH - 1) snakeX[0] = 0;
-        if (snakeX[0] < 0) snakeX[0] = SnakeGameMain.WIDTH - 1;
-        if (snakeY[0] > SnakeGameMain.HEIGHT - 1) snakeY[0] = 0;
-        if (snakeY[0] < 0) snakeY[0] = SnakeGameMain.HEIGHT - 1;
+        if (snakeX[0] < 0){
+            snakeX[0] = SnakeGameMain.WIDTH - 1;
+        }
+
+        if (snakeY[0] > SnakeGameMain.HEIGHT - 1){
+            snakeY[0] = 0;
+        }
+        if (snakeY[0] < 0){
+            snakeY[0] = SnakeGameMain.HEIGHT - 1;
+        }
     }
 }

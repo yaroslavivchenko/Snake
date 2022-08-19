@@ -14,7 +14,7 @@ public class SnakeGameMain extends JPanel implements ActionListener {
     static final int HEIGHT = 20;
     private static final int speed = 10;
     Snake snake = new Snake(5, 6, 5, 5);
-    Timer timer = new Timer(1000/speed,this);
+    Timer timer = new Timer(1500 / speed, this);
 
     public SnakeGameMain() {
         timer.start();
@@ -38,7 +38,7 @@ public class SnakeGameMain extends JPanel implements ActionListener {
         }
         for (int l = 0; l < snake.length; l++) {
             graphics.setColor(Color.green);
-            graphics.fillRect(snake.snakeX[1] * SCALE+2, snake.snakeY[1] * SCALE+2, SCALE-2, SCALE-2);
+            graphics.fillRect(snake.snakeX[1] * SCALE + 2, snake.snakeY[1] * SCALE + 2, SCALE - 2, SCALE - 2);
         }
     }
 
@@ -59,14 +59,22 @@ public class SnakeGameMain extends JPanel implements ActionListener {
         repaint();
     }
 
-    class KeyBoard extends KeyAdapter{
-        public void keyPressed(KeyEvent event){
+    class KeyBoard extends KeyAdapter {
+        public void keyPressed(KeyEvent event) {
             int key = event.getKeyCode();
 
-            if ((key == KeyEvent.VK_UP) &&(snake.direction!=2)) snake.direction = 0;
-            if ((key == KeyEvent.VK_DOWN) &&(snake.direction!=0)) snake.direction = 2;
-            if ((key == KeyEvent.VK_LEFT) &&(snake.direction!=3)) snake.direction = 1;
-            if ((key == KeyEvent.VK_RIGHT) &&(snake.direction!=1)) snake.direction = 3;
+            if ((key == KeyEvent.VK_UP) && (snake.direction != 2)) {
+                snake.direction = 0;
+            }
+            if ((key == KeyEvent.VK_DOWN) && (snake.direction != 0)) {
+                snake.direction = 2;
+            }
+            if ((key == KeyEvent.VK_LEFT) && (snake.direction != 1)) {
+                snake.direction = 3;
+            }
+            if ((key == KeyEvent.VK_RIGHT) && (snake.direction != 3)) {
+                snake.direction = 1;
+            }
         }
     }
 }
