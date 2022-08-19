@@ -1,10 +1,10 @@
 package Objects;
 
 class Snake {
-    int length = 2;
-    int direction = 0;
-    int[] snakeX = new int[300];
-    int[] snakeY = new int[300];
+    public int length = 2;
+    public int direction = 2;
+    public int[] snakeX = new int[300];
+    public int[] snakeY = new int[300];
 
     Snake(int x1, int y1, int x2, int y2) {
         snakeX[0] = x1;
@@ -29,12 +29,16 @@ class Snake {
             snakeY[0]++;
         }
         //right
-        if (direction == 1) {
-            snakeX[0]++;
+        if (direction == 3) {
+            snakeX[0]--;
         }
         //left
-        if (direction == 3) {
-            snakeY[0]--;
+        if (direction == 1) {
+            snakeY[0]++;
         }
+        if (snakeX[0] > SnakeGameMain.WIDTH - 1) snakeX[0] = 0;
+        if (snakeX[0] < 0) snakeX[0] = SnakeGameMain.WIDTH - 1;
+        if (snakeY[0] > SnakeGameMain.HEIGHT - 1) snakeY[0] = 0;
+        if (snakeY[0] < 0) snakeY[0] = SnakeGameMain.HEIGHT - 1;
     }
 }

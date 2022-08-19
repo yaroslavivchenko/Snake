@@ -2,15 +2,24 @@ package Objects;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class SnakeGameMain extends JPanel {
+public class SnakeGameMain extends JPanel implements ActionListener {
     static JFrame jFrame;
-    private static final int SCALE = 30;
-    private static final int WIDTH = 20;
-    private static final int HEIGHT = 20;
-    Snake snake = new Snake(5, 5, 5, 6);
+    static final int SCALE = 32;
+    static final int WIDTH = 20;
+    static final int HEIGHT = 20;
+    private static final int speed = 10;
+    Snake snake = new Snake(5, 6, 5, 5);
+    Timer timer = new Timer(1000/speed,this);
 
-    public void SnakeGameMain() {
+    public SnakeGameMain() {
+        timer.start();
+        addKeyListener(new KeyBoard());
+        setFocusable(true);
 
     }
 
@@ -29,7 +38,7 @@ public class SnakeGameMain extends JPanel {
         }
         for (int l = 0; l < snake.length; l++) {
             graphics.setColor(Color.green);
-            graphics.fillRect(snake.snakeX[1] * SCALE, snake.snakeY[1] * SCALE, SCALE, SCALE);
+            graphics.fillRect(snake.snakeX[1] * SCALE+2, snake.snakeY[1] * SCALE+2, SCALE-2, SCALE-2);
         }
     }
 
@@ -42,5 +51,22 @@ public class SnakeGameMain extends JPanel {
         jFrame.setLocationRelativeTo(null);
         jFrame.setVisible(true);
         jFrame.add(new SnakeGameMain());
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        snake.move();
+        repaint();
+    }
+
+    class KeyBoard extends KeyAdapter{
+        public void keyPressed(KeyEvent event){
+            int key = event.getKeyCode();
+
+            if ((key == KeyEvent.VK_UP) &&(snake.direction!=2)) snake.direction = 0;
+            if ((key == KeyEvent.VK_DOWN) &&(snake.direction!=0)) snake.direction = 2;
+            if ((key == KeyEvent.VK_LEFT) &&(snake.direction!=3)) snake.direction = 1;
+            if ((key == KeyEvent.VK_RIGHT) &&(snake.direction!=1)) snake.direction = 3;
+        }
     }
 }
